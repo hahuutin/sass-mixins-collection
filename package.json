@@ -1,0 +1,22 @@
+{
+  "name": "sass-mixins-collection",
+  "version": "1.0.0",
+  "description": "Sass Mixins Collection",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ha Huu Tin",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-highlightjs": "^0.6.1",
+    "highlight.js": "^9.3.0",
+    "jquery": "^2.2.3",
+    "material-design-lite": "^1.1.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.3"
+  }
+}

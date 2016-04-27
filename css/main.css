@@ -1,0 +1,55 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	/*background-color: green;*/
+}
+
+.main-title {
+	text-align: center;
+	font-weight: 300;
+}
+
+.mdl-card {
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+/* SEARCH */
+.search {
+	position: relative;
+}
+.search__input {
+	width: 100%;
+	height: 50px;
+	margin-bottom: 50px;
+	border-radius: 1000px;
+	border: none;
+	color: #FFF;
+	padding: 0 20px 0 50px;
+	background-color: rgba(0,0,0,0.7);
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.search__input:focus {
+	outline: none;
+}
+.search__icon {
+	position: absolute;
+	left: 15px;
+	top: 10px;
+	color: #FFF;
+	font-size: 30px;
+}
+
+pre {
+	margin: 0 20px 20px;
+}
+
+code {
+	font-family: "Meslo LG L Regular", Monaco;
+	font-size: 12px;
+}
+.hljs {
+	border-radius: 3px;
+}

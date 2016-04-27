@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-ng-app="sass-mixin-collection">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <title>Sass Mixins Collection</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
+        <link rel="stylesheet" href="/node_modules/highlight.js/styles/railscasts.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-color--grey-100" data-ng-controller="MainController">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h1 class="main-title">{{title}}</h1>
+                    <form class="search" action="#">
+                        <input class="search__input" type="text" data-ng-model="searchMixinName" placeholder="Search mixin name...">
+                        <i class="material-icons search__icon">search</i>
+                    </form>
+
+                    <div ng-repeat="mixin in mixins | filter: searchMixinName">
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">{{mixin.name}}</h2>
+                            </div>
+                            <div hljs hljs-include="{{mixin.name}}"></div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">Truncate</h2>
+                        </div>
+                        <div hljs hljs-include="'truncate'"></div>
+                    </div>
+
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text">At root &</h2>
+                        </div>
+                        <div hljs hljs-include="'atroot'"></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Script -->
+        <script src="/node_modules/material-design-lite/material.min.js"></script>
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/angular/angular.min.js"></script>
+        <!-- <script src="/node_modules/highlight.js/lib/highlight.js"></script> -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+        <script src="/node_modules/angular-highlightjs/angular-highlightjs.min.js"></script>
+        <script src="scripts/main.js"></script>
+
+<!-- List mixins -->
+<script type="text/ng-template" id="truncate">
+@mixin text-overflow() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</script>
+
+<script type="text/ng-template" id="atroot">
+@mixin root-siblings($selector) {
+    @at-root #{$selector}#{&} {
+        @content;
+    }
+}
+</script>
+<!-- End -->
+
+    </body>
+</html>
