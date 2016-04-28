@@ -1,35 +1,54 @@
 * {
 	box-sizing: border-box;
 }
-body {
-	/*background-color: green;*/
-}
 
+/*.mdl-grid {
+	width: 800px;
+	max-width: 100%;
+}
+*/
 .main-title {
 	text-align: center;
 	font-weight: 300;
+	margin-top: 10px;
+}
+
+.sub-title {
+	text-align: center;
+	font-weight: 300;
+}
+.sub-title strong {
+	color: rgb(233, 30, 99);
+	font-size: 40px;
 }
 
 .mdl-card {
 	width: 100%;
 	margin-bottom: 30px;
 }
+.mdl-card__title-text {
+	text-transform: lowercase;
+	line-height: 36px;
+	margin-left: 3px;
+	font-size: 20px;
+}
 
 /* SEARCH */
 .search {
 	position: relative;
+	margin-bottom: 50px;
 }
 .search__input {
 	width: 100%;
 	height: 50px;
-	margin-bottom: 50px;
 	border-radius: 1000px;
 	border: none;
 	color: #FFF;
 	padding: 0 20px 0 50px;
 	background-color: rgba(0,0,0,0.7);
 	text-transform: uppercase;
-	font-weight: 700;
+	font-weight: 300;
+	font-size: 14px;
 }
 .search__input:focus {
 	outline: none;
@@ -47,12 +66,32 @@ pre {
 }
 
 code {
-	font-family: "Meslo LG L Regular", Monaco;
+	font-family: Monaco, Consolas;
 	font-size: 12px;
+	white-space: pre-wrap;
 }
+
 .hljs {
 	border-radius: 3px;
 }
+
 .no-result {
 	text-align: center;
+}
+
+.mdl-layout__drawer {
+	width: 300px;
+}
+
+.mdl-layout--fixed-drawer>.mdl-layout__content {
+    margin-left: 300px;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+	padding: 7px 40px;
+}
+
+.mdl-layout__drawer>.mdl-layout__title, .mdl-layout__drawer>.mdl-layout-title {
+	text-align: left;
+    margin-top: 10px;
 }

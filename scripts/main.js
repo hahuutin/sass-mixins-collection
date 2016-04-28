@@ -14,7 +14,22 @@ app.controller('MainController', function($scope) {
 			'name': 'truncate'
 		},
 		{
-			'name': 'atroot'
+			'name': 'at-root'
+		},
+		{
+			'name': 'detect-device'
+		},
+		{
+			'name': 'font-smoothing'
+		},
+		{
+			'name': 'placeholder'
+		},
+		{
+			'name': 'transform-centering'
+		},
+		{
+			'name': 'flexbox-centering'
 		}
 	];
 });

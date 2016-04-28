@@ -9,47 +9,45 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
+        <link rel="stylesheet" href="/node_modules/angular/angular-csp.css">
         <link rel="stylesheet" href="/node_modules/highlight.js/styles/railscasts.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <div class="mdl-layout mdl-js-layout mdl-color--grey-100" data-ng-controller="MainController">
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--12-col">
-                    <h1 class="main-title">{{title}}</h1>
-                    <form class="search" action="#">
-                        <input class="search__input" type="text" data-ng-model="searchMixinName" placeholder="Search mixin name...">
-                        <i class="material-icons search__icon">search</i>
-                    </form>
-
-                    <div ng-repeat="mixin in mixins | filter: searchMixinName">
-                        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                            <div class="mdl-card__title">
-                                <h2 class="mdl-card__title-text">{{mixin.name}}</h2>
-                            </div>
-							
-                            <div hljs hljs-include="mixin.name"></div>
-                        </div>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header mdl-color--grey-100" data-ng-controller="MainController">
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title sub-title"><strong>{{mixins.length}}</strong> mixins available!</span>
+                <nav class="mdl-navigation">
+                    <div ng-repeat="mixinItem in mixins">
+                        <a class="mdl-navigation__link"  href="#cat_{{mixinItem.name}}">{{mixinItem.name}}</a>
                     </div>
-					
-					<h5 class="no-result" ng-show="(mixins | filter:searchMixinName).length == 0">No result to display</h5>
-                    
-
-                    <!-- <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">Truncate</h2>
-                        </div>
-                        <div hljs hljs-include="'truncate'"></div>
-                    </div>
-
-                    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                        <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text">At root &</h2>
-                        </div>
-                        <div hljs hljs-include="'atroot'"></div>
-                    </div> -->
-                </div>
+                </nav>
             </div>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+                    <div class="mdl-grid mdl-grid--no-spacing">
+                        <div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset">
+                            <h1 class="main-title">{{title}}</h1>
+                            <form class="search" action="#">
+                                <input class="search__input mdl-shadow--16dp" type="text" data-ng-model="searchMixinName" placeholder="Search mixin name...">
+                                <i class="material-icons search__icon">search</i>
+                            </form>
+                            <div ng-repeat="mixin in mixins | filter: searchMixinName">
+                                <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="cat_{{mixin.name}}">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{{mixin.name}}</h2>
+                                    </div>
+                                    
+                                    <div hljs hljs-include="mixin.name" hljs-language="css"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Message no result -->
+                            <h5 class="no-result" ng-show="(mixins | filter:searchMixinName).length == 0">No result to display</h5>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
 
         <!-- Script -->
@@ -70,10 +68,130 @@
 }
 </script>
 
-<script type="text/ng-template" id="atroot">
+<script type="text/ng-template" id="at-root">
 @mixin root-siblings($selector) {
     @at-root #{$selector}#{&} {
         @content;
+    }
+}
+</script>
+
+<script type="text/ng-template" id="detect-device">
+@mixin device($device, $orientation) {
+    // Iphone 4 portrait
+    @if $device == "iphone4" and $orientation == "portrait" {
+        @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+            @content;
+        }
+    }
+    // Iphone 4 landscape
+    @else if $device == "iphone4" and $orientation == "landscape" {
+        @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+            @content;
+        }
+    }
+    // Iphone 5 portrait
+    @else if $device == "iphone5" and $orientation == "portrait" {
+        @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+            @content;
+        }
+    }
+    // Iphone 5 landscape
+    @else if $device == "iphone5" and $orientation == "landscape" {
+        @media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+            @content;
+        }
+    }
+}
+</script>
+
+<script type="text/ng-template" id="font-smoothing">
+@mixin font-smoothing($value) {
+    @if $value == "on" {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    @if $value == "off" {
+        -webkit-font-smoothing: subpixel-antialiased;
+        -moz-osx-font-smoothing: auto;
+    }
+}
+</script>
+
+<script type="text/ng-template" id="placeholder">
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &.placeholder {
+        @content;
+    }
+}
+</script>
+
+<script type="text/ng-template" id="transform-centering">
+@mixin transform-centering($scope) {
+    & {
+        position: absolute;
+    }
+
+    @if $scope == "vertical" {
+        & {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    @if $scope == "horizontal" {
+        & {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    @if $scope == "horizontal-and-vertical" {
+        & {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+</script>
+
+<script type="text/ng-template" id="flexbox-centering">
+@mixin flexbox-centering($scope) {
+    & {
+        display: flex;
+    }
+
+    @if $scope == "vertical" {
+        & {
+            align-items: center;
+        }
+    }
+
+    @if $scope == "horizontal" {
+        & {
+            justify-content: center;
+        }
+    }
+
+    @if $scope == "horizontal-and-vertical" {
+        & {
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 </script>
