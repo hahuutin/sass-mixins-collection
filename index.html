@@ -22,14 +22,17 @@
                         <i class="material-icons search__icon">search</i>
                     </form>
 
-                    <div ng-repeat="mixin in mixins | filter: searchMixinName">
+                    <div ng-repeat="mixin in mixins = (mixins | filter: searchMixinName)">
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title">
                                 <h2 class="mdl-card__title-text">{{mixin.name}}</h2>
                             </div>
-                            <div hljs hljs-include="{{mixin.name}}"></div>
+							
+                            <div hljs hljs-include="mixin.name"></div>
                         </div>
                     </div>
+					
+					<h5 class="no-result" ng-show="mixins.length == 0">No result to display</h5>
                     
 
                     <!-- <div class="demo-card-wide mdl-card mdl-shadow--2dp">

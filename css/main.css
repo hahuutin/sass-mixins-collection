@@ -53,3 +53,6 @@ code {
 .hljs {
 	border-radius: 3px;
 }
+.no-result {
+	text-align: center;
+}
