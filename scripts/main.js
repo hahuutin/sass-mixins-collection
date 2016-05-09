@@ -14,6 +14,9 @@ app.controller('MainController', function($scope) {
 			'name': 'truncate'
 		},
 		{
+			'name': 'truncate-multiline'
+		},
+		{
 			'name': 'at-root'
 		},
 		{

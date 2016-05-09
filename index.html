@@ -68,6 +68,15 @@
 }
 </script>
 
+<script type="text/ng-template" id="truncate-multiline">
+@mixin truncate-multiline($line: 3) {
+	overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+}
+</script>
+
 <script type="text/ng-template" id="at-root">
 @mixin root-siblings($selector) {
     @at-root #{$selector}#{&} {
