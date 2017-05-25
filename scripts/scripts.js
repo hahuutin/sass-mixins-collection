@@ -1,3 +1,6 @@
-var abc = "Hello World";
+(function() {
+  'use strict';
 
-console.log(abc)
+  var abc = 'Hello World';
+  document.getElementById('root').innerHTML = abc;
+})();
